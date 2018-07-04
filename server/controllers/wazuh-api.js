@@ -591,12 +591,14 @@ export default class WazuhApi {
 
             const totalItems = output.body.data.totalItems;
 
+            /*
             while(items.length < totalItems){
                 params.offset += params.limit;
                 const tmp = await needle('get', url, params, headers)
                 items.push(...tmp.body.data.items)
             }
-
+            */
+            
             const result = {
                 groups     : [],
                 nodes      : [],
@@ -612,6 +614,7 @@ export default class WazuhApi {
                 }
             }
 
+            /*
             for(const agent of items){
                 if(agent.id === '000') continue;
                 if(agent.group && !result.groups.includes(agent.group)) result.groups.push(agent.group);
@@ -627,6 +630,279 @@ export default class WazuhApi {
                         });
                     }
                 }
+            }
+            */
+
+            if (config.cluster_info.cluster === "aws") {
+                result.groups.push("default");
+
+                result.nodes.push("node01");
+                result.nodes.push("node02");
+                result.nodes.push("node03");
+                result.nodes.push("node04");
+
+                result.osPlatforms.push({
+                    name:     "Microsoft Windows Server 2016 Datacenter",
+                    platform: "windows",
+                    version:  "10.0.14393"
+                });
+
+                result.osPlatforms.push({
+                    name:     "CentOS Linux",
+                    platform: "centos",
+                    version:  "7"
+                });
+
+                result.osPlatforms.push({
+                    name:     "Microsoft Windows Server 2016 Datacenter",
+                    platform: "windows",
+                    version:  "10.0.14393"
+                });
+
+                result.osPlatforms.push({
+                    name:     "Microsoft Windows Server 2012 R2 Standard",
+                    platform: "windows",
+                    version:  "6.3.9600"
+                });
+
+                result.osPlatforms.push({
+                    name:     "Ubuntu",
+                    platform: "ubuntu",
+                    version:  "16.04.4 LTS"
+                });
+
+                result.versions.push("Wazuh v2.0");
+                result.versions.push("Wazuh v2.0.1");
+                result.versions.push("Wazuh v2.1.1");
+
+            } else if (config.cluster_info.cluster === "azure") {
+                result.groups.push("default");
+
+                result.nodes.push("node01");
+                result.nodes.push("node02");
+                result.nodes.push("node03");
+
+                result.osPlatforms.push({
+                    name:     "Microsoft Windows Server 2016 Datacenter",
+                    platform: "windows",
+                    version:  "10.0.14393"
+                });
+
+                result.osPlatforms.push({
+                    name:     "Ubuntu",
+                    platform: "ubuntu",
+                    version:  "16.04.4 LTS"
+                });
+
+                result.osPlatforms.push({
+                    name:     "Red Hat Enterprise Linux Server",
+                    platform: "rhel",
+                    version:  "7.4"
+                });
+
+                result.osPlatforms.push({
+                    name:     "Red Hat Enterprise Linux Server",
+                    platform: "rhel",
+                    version:  "7.5"
+                });
+
+                result.osPlatforms.push({
+                    name:     "Microsoft Windows Server 2012 R2 Standard",
+                    platform: "windows",
+                    version:  "6.3.9600"
+                });
+
+                result.osPlatforms.push({
+                    name:     "CentOS Linux",
+                    platform: "centos",
+                    version:  "7"
+                });
+
+                result.osPlatforms.push({
+                    name:     "Microsoft Windows 10 Pro",
+                    platform: "windows",
+                    version:  "10.0.17134"
+                });
+
+
+                result.versions.push("Wazuh v2.0");
+                result.versions.push("Wazuh v2.0.1");
+                result.versions.push("Wazuh v2.1.1");
+                result.versions.push("Wazuh v2.1.1 [Ver: 10.0.14393] - Wazuh v2.1.1");
+                result.versions.push("Wazuh v3.2.1");
+
+            } else if (config.cluster_info.cluster === "noncloud") {
+                result.groups.push("default");
+         
+                result.nodes.push("node01");
+                result.nodes.push("node02");
+                result.nodes.push("node03");      
+                result.nodes.push("node04");      
+                result.nodes.push("node05");      
+                result.nodes.push("node06");      
+                result.nodes.push("node07");      
+                result.nodes.push("node08");      
+
+                result.versions.push('Wazuh v2.1.0');
+                result.versions.push('Wazuh v2.1.1');
+                result.versions.push('Wazuh v2.1.1 [Ver: 6.2.9200] - Wazuh v2.1.1');
+                result.versions.push('Wazuh v2.0.1');
+                result.versions.push('Wazuh v3.2.1 [Ver: 6.2.9200] - Wazuh v3.2.1');
+                result.versions.push('Wazuh v2.1.1 [Ver: 6.3.9600] - Wazuh v2.1.1');
+                result.versions.push('Wazuh v2.1.1 [Ver: 10.0.14393] - Wazuh v2.1.1');
+                result.versions.push('Wazuh v3.2.1');
+                result.versions.push('Wazuh v3.2.2');
+                result.versions.push('Wazuh v3.2.1 [Ver: 6.3.9600] - Wazuh v3.2.1');
+
+                result.osPlatforms.push({
+                    name:     "Microsoft Windows Server 2016 Datacenter",
+                    platform: "windows",
+                    version:  "10.0.14393"
+                });
+
+                result.osPlatforms.push({
+                    name:     "Red Hat Enterprise Linux Server",
+                    platform: "rhel",
+                    version:  "6.5"
+                });
+
+                result.osPlatforms.push({
+                    name:     "KDE neon",
+                    platform: "neon",
+                    version:  "5.12"
+                });
+
+                result.osPlatforms.push({
+                    name:     "Microsoft Windows Server 2016 Datacenter",
+                    platform: "windows",
+                    version:  "10.0.14393"
+                });
+
+                result.osPlatforms.push({
+                    name:     "Ubuntu",
+                    platform: "ubuntu",
+                    version:  "16.04.1 LTS"
+                }); 
+
+                result.osPlatforms.push({
+                    name:     "Microsoft Windows Server 2016 Standard",
+                    platform: "windows",
+                    version:  "10.0.14393"
+                });  
+
+                result.osPlatforms.push({
+                    name:     "CentOS Linux",
+                    platform: "centos",
+                    version:  "6.8"
+                });  
+
+                result.osPlatforms.push({
+                    name:     "Ubuntu",
+                    platform: "ubuntu",
+                    version:  "16.04.4 LTS"
+                }); 
+
+                result.osPlatforms.push({
+                    name:     "CentOS Linux",
+                    platform: "centos",
+                    version:  "7"
+                });  
+
+                result.osPlatforms.push({
+                    name:     "Red Hat Enterprise Linux Server",
+                    platform: "rhel",
+                    version:  "6.2"
+                });
+
+                result.osPlatforms.push({
+                    name:     "Red Hat Enterprise Linux Server",
+                    platform: "rhel",
+                    version:  "7.4"
+                });
+
+                result.osPlatforms.push({
+                    name:     "Red Hat Enterprise Linux Server",
+                    platform: "rhel",
+                    version:  "5.7"
+                });
+
+                result.osPlatforms.push({
+                    name:     "Red Hat Enterprise Linux Server",
+                    platform: "rhel",
+                    version:  "6.5"
+                });
+
+                result.osPlatforms.push({"platform": "ubuntu", "version": "16.04.2 LTS", "name": "Ubuntu"});
+                result.osPlatforms.push({"platform": "ubuntu", "version": "14.04.5 LTS, Trusty Tahr", "name": "Ubuntu"});
+                result.osPlatforms.push({"platform": "windows", "version": "6.1.7601", "name": "Microsoft Windows 7 Professional Service Pack 1"});
+                result.osPlatforms.push({"platform": "rhel", "version": "5.9", "name": "Red Hat Enterprise Linux Server"});
+                result.osPlatforms.push({"platform": "windows", "version": "6.3.9600", "name": "Microsoft Windows Server 2012 R2 Essentials"});
+                result.osPlatforms.push({"platform": "rhel", "version": "5.7", "name": "Red Hat Enterprise Linux"});
+                result.osPlatforms.push({"platform": "windows", "version": "6.3.9600", "name": "Microsoft Windows 8.1 Pro"});
+                result.osPlatforms.push({"platform": "windows", "version": "10.0.15063", "name": "Microsoft Windows 10 Enterprise"});
+                result.osPlatforms.push({"platform": "rhel", "version": "7.5", "name": "Red Hat Enterprise Linux Server"});
+                result.osPlatforms.push({"platform": "windows", "version": "6.1.7601", "name": "Microsoft Windows Server 2008 R2 Enterprise Edition (full) Service Pack 1"});
+                result.osPlatforms.push({"platform": "rhel", "version": "5.10", "name": "Red Hat Enterprise Linux"});
+                result.osPlatforms.push({"platform": "windows", "version": "6.3.9600", "name": "Microsoft Windows Storage Server 2012 R2 Standard"});
+                result.osPlatforms.push({"platform": "windows", "version": "6.3.9600", "name": "Microsoft Windows Server 2012 R2 Datacenter"});
+                result.osPlatforms.push({"platform": "windows", "version": "6.1.7601", "name": "Microsoft Windows 7 Enterprise Edition Professional Service Pack 1"});
+                result.osPlatforms.push({"platform": "windows", "version": "6.3.9600", "name": "Microsoft Windows 8.1 Pro with Media Center"});
+                result.osPlatforms.push({"platform": "sles_sap", "version": "12-SP1", "name": "SLES_SAP"});
+                result.osPlatforms.push({"platform": "rhel", "version": "5.11", "name": "Red Hat Enterprise Linux Server"});
+                result.osPlatforms.push({"platform": "windows", "version": "10.0.14393", "name": "Microsoft Windows Server 2016 Standard Evaluation"});
+                result.osPlatforms.push({"platform": "windows", "version": "6.2.9200", "name": "Microsoft Windows Server 2012 StandardMicrosoft Windows Server 2012 Standard"});
+                result.osPlatforms.push({"platform": "windows", "version": "6.0.6002", "name": "Microsoft Windows Server 2008 Standard Edition Service Pack 2"});
+                result.osPlatforms.push({"platform": "windows", "version": "10.0.14393", "name": "Microsoft Windows Storage Server 2016 Standard"});
+                result.osPlatforms.push({"platform": "rhel", "version": "5.3", "name": "Red Hat Enterprise Linux Server"});
+                result.osPlatforms.push({"platform": "windows", "version": "10.0.14393", "name": "Microsoft Windows Server 2016 StandardMicrosoft Windows Server 2016 Standard"});
+                result.osPlatforms.push({"platform": "windows", "version": "10.0.16299", "name": "Microsoft Windows 10 Home"});
+                result.osPlatforms.push({"platform": "ol", "version": "6.9", "name": "Oracle Linux Server"});
+                result.osPlatforms.push({"platform": "windows", "version": "desc", "name": "Microsoft Windows unknown version "});
+                result.osPlatforms.push({"platform": "rhel", "version": "7.1", "name": "Red Hat Enterprise Linux Server"});
+                result.osPlatforms.push({"platform": "debian", "version": "7", "name": "Debian GNU/Linux"});
+                result.osPlatforms.push({"platform": "windows", "version": "6.1.7600", "name": "Microsoft Windows Server 2008 R2 Standard Edition "});
+                result.osPlatforms.push({"platform": "windows", "version": "5.2.3790", "name": "Microsoft Windows Server 2003, Enterprise Edition Service Pack 2"});
+                result.osPlatforms.push({"platform": "windows", "version": "6.1.7601", "name": "Microsoft Windows Server 2008 R2 Standard Edition Service Pack 1"});
+                result.osPlatforms.push({"platform": "rhel", "version": "6.8", "name": "Red Hat Enterprise Linux"});
+                result.osPlatforms.push({"platform": "rhel", "version": "6.4", "name": "Red Hat Enterprise Linux Server"});
+                result.osPlatforms.push({"platform": "centos", "version": "5.11", "name": "CentOS Linux"});
+                result.osPlatforms.push({"platform": "windows", "version": "6.1.7601", "name": "Microsoft Windows 7 Home Premium Edition Home Edition Service Pack 1"});
+                result.osPlatforms.push({"platform": "windows", "version": "5.2.3790", "name": "Microsoft Windows Server 2003 R2 Standard Edition Service Pack 2"});
+                result.osPlatforms.push({"platform": "ol", "version": "6.8", "name": "Oracle Linux Server"});
+                result.osPlatforms.push({"platform": "rhel", "version": "6.6", "name": "Red Hat Enterprise Linux"});
+                result.osPlatforms.push({"platform": "windows", "version": "10.0.16299", "name": "Microsoft Windows 10 Enterprise"});
+                result.osPlatforms.push({"platform": "windows", "version": "10.0.15063", "name": "Microsoft Windows 10 Pro"});
+                result.osPlatforms.push({"platform": "ubuntu", "version": "18.04 LTS", "name": "Ubuntu"});
+                result.osPlatforms.push({"platform": "windows", "version": "5.1.2600", "name": "Microsoft Windows XP Professional Service Pack 3"});
+                result.osPlatforms.push({"platform": "windows", "version": "6.1.7601", "name": "Microsoft Windows 7 Ultimate Edition Professional Service Pack 1"});
+                result.osPlatforms.push({"platform": "windows", "version": "10.0.16299", "name": "Microsoft Windows 10 Pro"});
+                result.osPlatforms.push({"platform": "rhel", "version": "7.2", "name": "Red Hat Enterprise Linux Server"});
+                result.osPlatforms.push({"platform": "windows", "version": "6.0.6002", "name": "Microsoft Windows Server 2008 Enterprise Edition (full) Service Pack 2"});
+                result.osPlatforms.push({"platform": "rhel", "version": "6.7", "name": "Red Hat Enterprise Linux Server"});
+                result.osPlatforms.push({"platform": "centos", "version": "6.9", "name": "CentOS Linux"});
+                result.osPlatforms.push({"platform": "sles", "version": "12-SP1", "name": "SLES"});
+                result.osPlatforms.push({"platform": "windows", "version": "6.3.9600", "name": "Microsoft Windows Server 2012 R2 Standard"});
+                result.osPlatforms.push({"platform": "rhel", "version": "6.4", "name": "Red Hat Enterprise Linux"});
+                result.osPlatforms.push({"platform": "centos", "version": "6.5", "name": "CentOS Linux"});
+                result.osPlatforms.push({"platform": "hpux", "version": "11.31", "name": "HP-UX"});
+                result.osPlatforms.push({"platform": "rhel", "version": "6.7", "name": "Red Hat Enterprise Linux"});
+                result.osPlatforms.push({"platform": "centos", "version": "6.7", "name": "CentOS Linux"});
+                result.osPlatforms.push({"platform": "windows", "version": "6.2.9200", "name": "Microsoft Windows Storage Server 2012 Standard"});
+                result.osPlatforms.push({"platform": "windows", "version": "6.2.9200", "name": "Microsoft Windows Server 2012 Datacenter"});
+                result.osPlatforms.push({"platform": "windows", "version": "6.1.7601", "name": "Microsoft Windows Server 2008 R2 Datacenter Edition (full) Service Pack 1"});
+                result.osPlatforms.push({"platform": "windows", "version": "6.2.9200", "name": "Microsoft Windows Server 2012 Standard"});
+                result.osPlatforms.push({"platform": "ubuntu", "version": "14.04.4 LTS, Trusty Tahr", "name": "Ubuntu"});
+                result.osPlatforms.push({"platform": "rhel", "version": "6.9", "name": "Red Hat Enterprise Linux Server"});
+                result.osPlatforms.push({"platform": "rhel", "version": "7.3", "name": "Red Hat Enterprise Linux Server"});
+                result.osPlatforms.push({"platform": "windows", "version": "10.0.10586", "name": "Microsoft Windows Server 2016 Technical Preview 4"});
+                result.osPlatforms.push({"platform": "ubuntu", "version": "16.04.3 LTS", "name": "Ubuntu"});
+                result.osPlatforms.push({"platform": "windows", "version": "5.2.3790", "name": "Microsoft Windows Server 2003, Standard Edition Service Pack 2"});
+                result.osPlatforms.push({"platform": "rhel", "version": "5.5", "name": "Red Hat Enterprise Linux Server"});
+                result.osPlatforms.push({"platform": "rhel", "version": "6.9", "name": "Red Hat Enterprise Linux"});
+                result.osPlatforms.push({"platform": "windows", "version": "10.0.14393", "name": "Microsoft Windows 10 Pro"});
+                result.osPlatforms.push({"platform": "windows", "version": "10.0.17134", "name": "Microsoft Windows 10 Pro"});
+
+
             }
 
             const summary = await needle('get', url + '/summary', {}, headers)
@@ -649,3 +925,4 @@ export default class WazuhApi {
     }
 
 }
+
